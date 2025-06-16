@@ -1,2 +1,0 @@
-#updating chromosome to one for admixture
-plink2 --bfile Random600.pilot --update-map Chromosome.is.one.txt 1 2 --make-bed --out Random600.pilotA --allow-extra-chr
