@@ -1,0 +1,2 @@
+#updating chromosome to one for admixture
+plink2 --bfile OvSNP60QC --update-map Chromosome.is.one.txt 1 2 --make-bed --out updated_chr_60k --allow-extra-chr

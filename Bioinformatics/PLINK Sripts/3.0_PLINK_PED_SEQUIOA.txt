@@ -1,0 +1,22 @@
+#checking working directory
+pwd
+
+#check files in directory
+ls
+
+#go to CWD working directory with SNP VCF files
+cd CWD_SNP_DATA
+
+#load PLINK
+module load plink
+
+#check version of PLINK need PLINK 2.0 PLINK 1.9 maynot work
+plink --version
+
+
+plink2 --vcf 1670010001_GenotypingDataVCF.vcf --allow-extra-chr --make-pgen --out pgenOvSNP600
+
+plink2 --pfile pgenOvSNP600 --allow-extra-chr --export ped --out OvSNP600ped
+
+
+vcf 1670010002_GenotypingDataVCF.vcf

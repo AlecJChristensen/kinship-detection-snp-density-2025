@@ -1,0 +1,186 @@
+#filtering of files
+
+#Dropping individuals ~15%
+#Loci ~20%
+
+
+#Remove problematic SNPs
+#Rerun missing
+#Remove problematic individuals
+#######################################################################################################################################################
+#checking working directory
+pwd
+
+#check files in directory
+ls
+
+#go to CWD working directory with SNP VCF files
+cd CWD_SNP_DATAQC_filtering
+
+#load PLINK
+module load plink
+
+#check version of PLINK need PLINK 2.0 PLINK 1.9 maynot work
+plink --version
+
+#make bed file
+#plink2 --vcf yourfile.vcf --make-bed --out plink_data
+plink2 --vcf 1670010002_LowThreshold_LowSNPQCVCF.vcf --allow-extra-chr --make-bed --out 60QC
+
+#filtering of SNPs
+plink2 --bfile 60QC --geno <0.20> --make-bed --out OvSNP60QCfilteredSNP20
+plink2 --bfile 60QC --geno 0.2 --make-bed --allow-extra-chr --out 60QC_filtered
+#plink2 --bfile plink_data --geno <threshold> --make-bed --out filtered_data
+#Replace <threshold> with the percentage of missing loci above which you #want #to filter out SNPs. For example, if you want to filter out SNPs with more #than 5% missing loci, you would use --geno 0.05.
+#This command will produce a new set of PLINK files (filtered_data.bed, #filtered_data.bim, and filtered_data.fam) where SNPs with missingness #greater #than the specified threshold are removed.
+#OvSNP600QC.bed #OvSNP60QC.bed
+
+#Now Running Missing Data
+plink2 --bfile 60QC_filtered --missing --allow-extra-chr --out filtered20percentlociSNP60missing
+
+#filter out individuals
+plink2 --bfile your_data --mind <threshold> --make-bed --out filtered_data
+#Replace <threshold> with the percentage of missing genotypes above which you #want to drop individuals. For example, if you want to drop individuals with #more than 10% missing genotypes, you would use --mind 0.1.
+#This command will produce a new set of PLINK files (filtered_data.bed, #filtered_data.bim, and filtered_data.fam) where individuals with missingness #greater than the specified threshold are removed.
+
+#20 percent
+plink2 --bfile 60QC --geno 0.2 --make-bed --allow-extra-chr --out 60QC_filtered
+plink2 --bfile 60QC_filtered --missing --allow-extra-chr --out filtered20percentlociSNP60missing
+
+
+#25 percent
+plink2 --bfile 60QC --geno 0.25 --make-bed --allow-extra-chr --out 60QC_filtered25percent
+plink2 --bfile 60QC_filtered25percent --missing --allow-extra-chr --out filtered25percentlociSNP60missing
+
+plink2 --bfile 600QC --geno 0.25 --make-bed --allow-extra-chr --out 600QC_filtered25percent
+plink2 --bfile 600QC_filtered25percent --missing --allow-extra-chr --out filtered25percentlociSNP600missing
+
+#15 percent 
+plink2 --bfile 60QC --geno 0.15 --make-bed --allow-extra-chr --out 60QC_filtered15percent
+plink2 --bfile 60QC_filtered15percent --missing --allow-extra-chr --out filtered15percentlociSNP60missing
+
+plink2 --bfile 600QC --geno 0.15 --make-bed --allow-extra-chr --out 600QC_filtered15percent
+plink2 --bfile 600QC_filtered15percent --missing --allow-extra-chr --out filtered15percentlociSNP600missing
+
+
+
+#filter out individuals
+plink2 --bfile your_data --mind <threshold> --make-bed --out filtered_data
+#Replace <threshold> with the percentage of missing genotypes above which you #want to drop individuals. For example, if you want to drop individuals with #more than 10% missing genotypes, you would use --mind 0.1.
+#This command will produce a new set of PLINK files (filtered_data.bed, #filtered_data.bim, and filtered_data.fam) where individuals with missingness #greater than the specified threshold are removed.
+
+
+plink2 --bfile 60QC --mind 0.2 --make-bed --allow-extra-chr --out 60QC_filtered
+
+#filter out individuals
+
+#60K
+
+#fifteener   10%
+ plink2 --bfile 60QC_filtered15percent --mind 0.1 --make-bed --allow-extra-chr --out 60QC_filtered15.10
+ plink2 --bfile 60QC_filtered15.10 --missing --allow-extra-chr --out 60QC_filtered15.10.SNP60missing
+ plink2 --bfile 60QC_filtered15.10 --allow-extra-chr --export ped --out 60QC_filtered15.10
+
+#fifteensers 15%
+plink2 --bfile 60QC_filtered15percent --mind 0.15 --make-bed --allow-extra-chr --out 60QC_filtered15.15
+plink2 --bfile 60QC_filtered15.15 --missing --allow-extra-chr --out 60QC_filtered15.15.SNP60missing
+plink2 --bfile 60QC_filtered15.15 --allow-extra-chr --export ped --out 60QC_filtered15.15
+
+#fifteeners  20%
+plink2 --bfile 60QC_filtered15percent --mind 0.20 --make-bed --allow-extra-chr --out 60QC_filtered15.20
+plink2 --bfile 60QC_filtered15.20 --missing --allow-extra-chr --out 60QC_filtered15.20.SNP60missing
+plink2 --bfile 60QC_filtered15.20 --allow-extra-chr --export ped --out 60QC_filtered15.20
+
+#######
+
+#twenty   10%
+ plink2 --bfile 60QC --mind 0.2 --make-bed --allow-extra-chr --out 60QC_filtered20percent
+ plink2 --bfile 60QC_filtered20percent --mind 0.1 --make-bed --allow-extra-chr --out 60QC_filtered20.10
+ plink2 --bfile 60QC_filtered20.10 --missing --allow-extra-chr --out 60QC_filtered20.10.SNP60missing
+ plink2 --bfile 60QC_filtered20.10 --allow-extra-chr --export ped --out 60QC_filtered20.10
+
+
+#twenty   15%
+plink2 --bfile 60QC_filtered20percent --mind 0.15 --make-bed --allow-extra-chr --out 60QC_filtered20.15
+plink2 --bfile 60QC_filtered20.15 --missing --allow-extra-chr --out 60QC_filtered20.15.SNP60missing
+plink2 --bfile 60QC_filtered20.15 --allow-extra-chr --export ped --out 60QC_filtered20.15
+
+#twenty   20%
+plink2 --bfile 60QC_filtered20percent --mind 0.20 --make-bed --allow-extra-chr --out 60QC_filtered20.20
+plink2 --bfile 60QC_filtered20.20 --missing --allow-extra-chr --out 60QC_filtered20.20.SNP60missing
+plink2 --bfile 60QC_filtered20.20 --allow-extra-chr --export ped --out 60QC_filtered20.20
+
+#twentyfiver   10%
+ plink2 --bfile 60QC_filtered20percent --mind 0.1 --make-bed --allow-extra-chr --out 60QC_filtered25.10
+ plink2 --bfile 60QC_filtered25.10 --missing --allow-extra-chr --out 60QC_filtered25.10.SNP60missing
+ plink2 --bfile 60QC_filtered25.10 --allow-extra-chr --export ped --out 60QC_filtered25.10
+
+#twentyfiver   15%
+plink2 --bfile 60QC_filtered25percent --mind 0.15 --make-bed --allow-extra-chr --out 60QC_filtered25.15
+plink2 --bfile 60QC_filtered25.15 --missing --allow-extra-chr --out 60QC_filtered25.15.SNP60missing
+plink2 --bfile 60QC_filtered25.15 --allow-extra-chr --export ped --out 60QC_filtered25.15
+
+#twentyfiver   20%
+plink2 --bfile 60QC_filtered25percent --mind 0.20 --make-bed --allow-extra-chr --out 60QC_filtered25.20
+plink2 --bfile 60QC_filtered25.20 --missing --allow-extra-chr --out 60QC_filtered25.20.SNP60missing
+plink2 --bfile 60QC_filtered25.20 --allow-extra-chr --export ped --out 60QC_filtered25.20
+
+
+#600K
+
+#fifteener   10%
+ plink2 --bfile 600QC_filtered15percent --mind 0.1 --make-bed --allow-extra-chr --out 600QC_filtered15.10
+ plink2 --bfile 600QC_filtered15.10 --missing --allow-extra-chr --out 600QC_filtered15.10.SNP600missing
+ plink2 --bfile 600QC_filtered15.10 --allow-extra-chr --export ped --out 600QC_filtered15.10
+
+#fifteensers 15%
+plink2 --bfile 600QC_filtered15percent --mind 0.15 --make-bed --allow-extra-chr --out 600QC_filtered15.15
+plink2 --bfile 600QC_filtered15.15 --missing --allow-extra-chr --out 600QC_filtered15.15.SNP600missing
+plink2 --bfile 600QC_filtered15.15 --allow-extra-chr --export ped --out 600QC_filtered15.15
+
+#fifteeners  20%
+plink2 --bfile 600QC_filtered15percent --mind 0.20 --make-bed --allow-extra-chr --out 600QC_filtered15.20
+plink2 --bfile 600QC_filtered15.20 --missing --allow-extra-chr --out 600QC_filtered15.20.SNP600missing
+plink2 --bfile 600QC_filtered15.20 --allow-extra-chr --export ped --out 600QC_filtered15.20
+
+
+
+
+#twenty   10%
+ plink2 --bfile 600QC --mind 0.2 --make-bed --allow-extra-chr --out 600QC_filtered20percent
+ plink2 --bfile 600QC_filtered20percent --mind 0.1 --make-bed --allow-extra-chr --out 600QC_filtered20.10
+ plink2 --bfile 600QC_filtered20.10 --missing --allow-extra-chr --out 600QC_filtered20.10.SNP600missing
+ plink2 --bfile 600QC_filtered20.10 --allow-extra-chr --export ped --out 600QC_filtered20.10
+
+#twenty   15%
+plink2 --bfile 600QC_filtered20percent --mind 0.15 --make-bed --allow-extra-chr --out 600QC_filtered20.15
+plink2 --bfile 600QC_filtered20.15 --missing --allow-extra-chr --out 600QC_filtered20.15.SNP600missing
+plink2 --bfile 600QC_filtered20.15 --allow-extra-chr --export ped --out 600QC_filtered20.15
+
+#twenty   20%
+plink2 --bfile 600QC_filtered20percent --mind 0.20 --make-bed --allow-extra-chr --out 600QC_filtered20.20
+plink2 --bfile 600QC_filtered20.20 --missing --allow-extra-chr --out 600QC_filtered20.20.SNP600missing
+plink2 --bfile 600QC_filtered20.20 --allow-extra-chr --export ped --out 600QC_filtered20.20
+
+
+
+#twentyfiver   10%
+ plink2 --bfile 600QC_filtered25percent --mind 0.1 --make-bed --allow-extra-chr --out 600QC_filtered25.10
+ plink2 --bfile 600QC_filtered25.10 --missing --allow-extra-chr --out 600QC_filtered25.10.SNP600missing
+ plink2 --bfile 600QC_filtered25.10 --allow-extra-chr --export ped --out 600QC_filtered25.10
+
+#twentyfiver   15%
+plink2 --bfile 600QC_filtered25percent --mind 0.15 --make-bed --allow-extra-chr --out 600QC_filtered25.15
+plink2 --bfile 600QC_filtered25.15 --missing --allow-extra-chr --out 600QC_filtered25.15.SNP600missing
+plink2 --bfile 600QC_filtered25.15 --allow-extra-chr --export ped --out 600QC_filtered25.15
+
+#twentyfiver   20%
+plink2 --bfile 600QC_filtered25percent --mind 0.20 --make-bed --allow-extra-chr --out 600QC_filtered25.20
+plink2 --bfile 600QC_filtered25.20 --missing --allow-extra-chr --out 600QC_filtered25.20.SNP600missing
+plink2 --bfile 600QC_filtered25.20 --allow-extra-chr --export ped --out 600QC_filtered25.20
+
+
+
+
+
+

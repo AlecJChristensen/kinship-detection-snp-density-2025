@@ -1,0 +1,26 @@
+#Script for PLINK
+#5.10.24
+#This was typed into Notepad to help me remember
+#running through NDSU Cluster
+#This code is running the KING-robust kinship estimator
+#First-degree relations (parent-child, full siblings) correspond to ~0.25, second-degree relations correspond to ~0.125, etc. It is conventional to use a cutoff of ~0.354 (the geometric mean of 0.5 and 0.25) to screen for monozygotic twins and duplicate samples, ~0.177 to add first-degree relations, etc
+#website:https://www.cog-genomics.org/plink/2.0/distance#make_king
+#Thanks to Meggan for helping me out significantly on this 
+########################################################################
+#checking working directory
+pwd
+
+#check files in directory
+ls
+
+#go to CWD working directory with SNP VCF files
+cd CWD_SNP_DATA
+
+#load PLINK
+module load plink
+
+#check version of PLINK need PLINK 2.0 PLINK 1.9 maynot work
+plink --version
+
+#plink2 
+plink2 --vcf 1670010002_GenotypingDataVCF.vcf --make-king-table --allow-extra-chr --out OvSNP60_1670010002

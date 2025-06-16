@@ -1,0 +1,21 @@
+dos2unix admixture.k.6.19.24.pbs
+
+#!/bin/bash
+#PBS -q default 
+#PBS -N admixture.k.6.19.24         
+#PBS -o admixture.k.6.19.24.txt     
+#PBS -e admixture.k.6.19.24err.txt  
+#PBS -l nodes=1:ppn=8         	      
+#PBS -l mem=32gb                     
+#PBS -l walltime=36:00:00             
+#PBS -W group_list=x-ccast-prj-tseaborn                      
+#PBS -m ae
+#PBS -M alec.christensen@ndsu.edu
+
+cd CWD_SNP_DATAQC
+module load admixture/1.3.0
+admixture --cv=10 AMix60QC6.11.24.bed $K | tee log${K}.out
+
+echo "yay all done"
+
+qsub admixture.k.6.1.24.pbs
