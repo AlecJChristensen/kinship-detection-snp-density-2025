@@ -1,0 +1,512 @@
+library(sequoia)
+
+infile <- GenoConvert(InFile = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/seq.599.ped", InFormat="ped")
+infile60 <- GenoConvert(InFile = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/OvSNP60QCped.ped", InFormat="ped")
+LH60K <- read.csv("C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/LH60_RealMaster.csv")
+
+
+AgePriors60 <-MakeAgePrior(
+  Pedigree = NULL,
+  LifeHistData = LH60K,
+  MinAgeParent = 1,
+  MaxAgeParent = NULL,
+  Discrete = NULL,
+  Flatten = NULL,
+  lambdaNW = -log(0.5)/100,
+  Smooth = TRUE,
+  Plot = TRUE,
+  Return = "LR",
+  quiet = FALSE
+)
+
+
+
+ParRegular599 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'par',
+                             Err = 0.175)# 34Po
+
+PedRegular599 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'ped',
+                             Err = 0.175)# 34Po
+
+ParRegular599NLH <- GetMaybeRel(GenoM = infile,
+                                Module = 'par',
+                                Err = 0.175)# 34Po
+
+PedRegular599NLH <- GetMaybeRel(GenoM = infile,
+                                Module = 'ped',
+                                Err = 0.175)# 34Po
+
+ParRegular599.7 <- GetMaybeRel(GenoM = infile,
+                               LifeHistData = LH60K,
+                               AgePrior = AgePriors60,
+                               Module = 'par',
+                               Err = 0.07)# 34Po
+
+PedRegular599.7 <- GetMaybeRel(GenoM = infile,
+                               LifeHistData = LH60K,
+                               AgePrior = AgePriors60,
+                               Module = 'ped',
+                               Err = 0.07)# 34Po
+
+ParRegularNLH599.7 <- GetMaybeRel(GenoM = infile,
+                                  Module = 'par',
+                                  Err = 0.07)# 34Po
+
+PedRegularNLH599.7 <- GetMaybeRel(GenoM = infile,
+                                  Module = 'ped',
+                                  Err = 0.07)# 34Po
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+
+ParErr.14 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'par',
+                         Err = 0.14)# 34Po
+
+PedErr.14 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'ped',
+                         Err = 0.14)# 34Po
+
+ParErr.7 <- GetMaybeRel(GenoM = infile60,
+                        LifeHistData = LH60K,
+                        AgePrior = AgePriors60,
+                        Module = 'par',
+                        Err = 0.07)# 34Po
+
+PedErr.7 <- GetMaybeRel(GenoM = infile60,
+                        LifeHistData = LH60K,
+                        AgePrior = AgePriors60,
+                        Module = 'ped',
+                        Err = 0.07)# 34Po
+
+ParErr.2 <- GetMaybeRel(GenoM = infile60,
+                        LifeHistData = LH60K,
+                        AgePrior = AgePriors60,
+                        Module = 'par',
+                        Err = 0.02)# 34Po
+
+PedErr.2 <- GetMaybeRel(GenoM = infile60,
+                        LifeHistData = LH60K,
+                        AgePrior = AgePriors60,
+                        Module = 'ped',
+                        Err = 0.02)# 34Po
+ParErr.25 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'par',
+                         Err = 0.25)# 34Po
+
+PedErr.25 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'ped',
+                         Err = 0.25)# 34Po
+
+#################################################################################################################
+#################################################################################################################
+ParErr.14NLH <- GetMaybeRel(GenoM = infile60,
+                            Module = 'par',
+                            Err = 0.14)# 34Po
+
+PedErr.14NLH <- GetMaybeRel(GenoM = infile60,
+                            Module = 'ped',
+                            Err = 0.14)# 34Po
+
+ParErr.7NLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'par',
+                           Err = 0.07)# 34Po
+
+PedErr.7NLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'ped',
+                           Err = 0.07)# 34Po
+
+ParErr.2NLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'par',
+                           Err = 0.02)# 34Po
+
+PedErr.2NLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'ped',
+                           Err = 0.02)# 34Po
+
+ParErr.25NLH <- GetMaybeRel(GenoM = infile60,
+                            Module = 'par',
+                            Err = 0.25)# 34Po
+
+PedErr.25NLH <- GetMaybeRel(GenoM = infile60,
+                            Module = 'ped',
+                            Err = 0.25)# 34Po
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+
+Ped60.175QC <- GetMaybeRel(GenoM = infile60,
+                           LifeHistData = LH60K,
+                           AgePrior = AgePriors60,
+                           Module = 'ped',
+                           Err = 0.175)#31 PO
+
+FFinput <- Ped60.175QC$MaybeRel
+
+Families<- FindFamilies(Ped60.175QC)
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+
+Ped60.175QC <- GetMaybeRel(GenoM = infile60,
+                           LifeHistData = LH60K,
+                           AgePrior = AgePriors60,
+                           Module = 'ped',
+                           Err = 0.175)#31 PO
+#60K parental analysis
+Par60.175QC <- GetMaybeRel(GenoM = infile60,
+                           LifeHistData = LH60K,
+                           AgePrior = AgePriors60,
+                           Module = 'par',
+                           Err = 0.175)#31 PO
+
+Ped60.175QCNLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'ped',
+                           Err = 0.175)#31 PO
+#60K parental analysis
+Par60.175QCNLH <- GetMaybeRel(GenoM = infile60,
+                           Module = 'par',
+                           Err = 0.175)#31 PO
+
+
+
+Ped60.175QC.02 <- GetMaybeRel(GenoM = infile60,
+                              LifeHistData = LH60K,
+                              AgePrior = AgePriors60,
+                              Module = 'ped',
+                              Err = 0.02)#31 PO
+#60K parental analysis
+Par60.175QC.02 <- GetMaybeRel(GenoM = infile60,
+                              LifeHistData = LH60K,
+                              AgePrior = AgePriors60,
+                              Module = 'par',
+                              Err = 0.02)#31 PO
+
+Ped60.175QC.25 <- GetMaybeRel(GenoM = infile60,
+                              LifeHistData = LH60K,
+                              AgePrior = AgePriors60,
+                              Module = 'ped',
+                              Err = 0.02)#31 PO
+#60K parental analysis
+Par60.175QC.25 <- GetMaybeRel(GenoM = infile60,
+                              LifeHistData = LH60K,
+                              AgePrior = AgePriors60,
+                              Module = 'par',
+                              Err = 0.02)#31 PO
+
+Ped60.175QCNLH.02 <- GetMaybeRel(GenoM = infile60,
+                              Module = 'ped',
+                              Err = 0.02)#31 PO
+#60K parental analysis
+Par60.175QCNLH.02 <- GetMaybeRel(GenoM = infile60,
+                              Module = 'par',
+                              Err = 0.02)#31 PO
+
+Ped60.175QCNLH.25 <- GetMaybeRel(GenoM = infile60,
+                                 Module = 'ped',
+                                 Err = 0.25)#31 PO
+#60K parental analysis
+Par60.175QCNLH.25 <- GetMaybeRel(GenoM = infile60,
+                                 Module = 'par',
+                                 Err = 0.25)#31 PO
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+
+
+
+save.image(file = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/Sequioa.help_1.22.25.RData")
+
+
+
+# Load necessary libraries
+library(openxlsx)
+
+# Define the file path
+file_path <- "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help"
+file_name <- "Sequoia_Output.xlsx"
+full_path <- file.path(file_path, file_name)
+
+# Create the directory if it doesn't exist
+if (!dir.exists(file_path)) {
+  dir.create(file_path, recursive = TRUE)
+}
+
+# Prepare the data to be saved
+list_of_dfs <- list(
+  ParRegular599 = ParRegular599$MaybePar,
+  PedRegular599 = PedRegular599$MaybeRel,
+  ParRegular599NLH = ParRegular599NLH$MaybePar,
+  PedRegular599NLH = PedRegular599NLH$MaybeRel,
+  ParRegular599_7 = ParRegular599.7$MaybePar,
+  PedRegular599_7 = PedRegular599.7$MaybeRel,
+  ParRegularNLH599_7 = ParRegularNLH599.7$MaybePar,
+  PedRegularNLH599_7 = PedRegularNLH599.7$MaybeRel,
+  ParErr_14 = ParErr.14$MaybePar,
+  PedErr_14 = PedErr.14$MaybeRel,
+  ParErr_7 = ParErr.7$MaybePar,
+  PedErr_7 = PedErr.7$MaybeRel,
+  ParErr_2 = ParErr.2$MaybePar,
+  PedErr_2 = PedErr.2$MaybeRel,
+  ParErr_25 = ParErr.25$MaybePar,
+  PedErr_25 = PedErr.25$MaybeRel,
+  ParErr_14NLH = ParErr.14NLH$MaybePar,
+  PedErr_14NLH = PedErr.14NLH$MaybeRel,
+  ParErr_7NLH = ParErr.7NLH$MaybePar,
+  PedErr_7NLH = PedErr.7NLH$MaybeRel,
+  ParErr_2NLH = ParErr.2NLH$MaybePar,
+  PedErr_2NLH = PedErr.2NLH$MaybeRel,
+  ParErr_25NLH = ParErr.25NLH$MaybePar,
+  PedErr_25NLH = PedErr.25NLH$MaybeRel,
+  Ped60_175QC = Ped60.175QC$MaybeRel,
+  Par60_175QC = Par60.175QC$MaybePar,
+  Ped60_175QCNLH = Ped60.175QCNLH$MaybeRel,
+  Par60_175QCNLH = Par60.175QCNLH$MaybePar,
+  Ped60_175QC_02 = Ped60.175QC.02$MaybeRel,
+  Par60_175QC_02 = Par60.175QC.02$MaybePar,
+  Ped60_175QC_25 = Ped60.175QC.25$MaybeRel,
+  Par60_175QC_25 = Par60.175QC.25$MaybePar,
+  Ped60_175QCNLH_02 = Ped60.175QCNLH.02$MaybeRel,
+  Par60_175QCNLH_02 = Par60.175QCNLH.02$MaybePar,
+  Ped60_175QCNLH_25 = Ped60.175QCNLH.25$MaybeRel,
+  Par60_175QCNLH_25 = Par60.175QCNLH.25$MaybePar
+)
+
+# Write to Excel file
+write.xlsx(list_of_dfs, file = full_path, overwrite = TRUE)
+
+
+
+
+
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+
+ParErr.40 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'par',
+                         Err = 0.40)# 34Po
+
+PedErr.40 <- GetMaybeRel(GenoM = infile60,
+                         LifeHistData = LH60K,
+                         AgePrior = AgePriors60,
+                         Module = 'ped',
+                         Err = 0.40)# 34Po
+
+GenoM <- GenoConvert(InFile = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/OvSNP60QCped.ped", InFormat="ped")
+GenoM.checked <- CheckGeno(GenoM, Return="GenoM")
+Excl <- CheckGeno(GenoM, Return = "excl")
+
+
+Pedsequioa <- sequoia (GenoM = infile60,
+                         LifeHistData = LH60K,
+                         Module = 'ped',
+                         Err = 0.175)# 34Po
+
+Parsequioa <- sequoia (GenoM = infile60,
+                       LifeHistData = LH60K,
+                       Module = 'par',
+                       Err = 0.175)# 34Po
+
+ParsequioaNLH <- sequoia (GenoM = infile60,
+                       Module = 'par',
+                       Err = 0.175)# 34Po
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+
+save.image(file = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/Sequioa.help_1.24.25.RData")
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+
+ParRegular599.17 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'par',
+                             Err = 0.17)# 34Po
+
+PedRegular599.17 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'ped',
+                             Err = 0.17)# 34Po
+
+ParRegular599.18 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.18)# 34Po
+
+PedRegular599.18 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.18)# 34Po
+
+
+file_path <- "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help"
+file_name <- "Sequoia_Output3.xlsx"
+full_path <- file.path(file_path, file_name)
+
+# Create the directory if it doesn't exist
+if (!dir.exists(file_path)) {
+  dir.create(file_path, recursive = TRUE)
+}
+
+# Prepare the data to be saved
+list_of_dfs3 <- list(
+  ParRegular599.17 = ParRegular599.17$MaybePar,
+  PedRegular599.17 = PedRegular599.17$MaybeRel,
+  ParRegular599.18 = ParRegular599.18$MaybePar,
+  PedRegular599.18 = PedRegular599.18$MaybeRel
+
+)
+
+# Write to Excel file
+write.xlsx(list_of_dfs3, file = full_path, overwrite = TRUE)
+
+
+
+###################################################################################################################
+###################################################################################################################
+####################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+ParRegular599.01 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.01)# 34Po
+
+PedRegular599.01 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.01)# 34Po
+
+ParRegular599.02 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'par',
+                             Err = 0.02)# 34Po
+
+PedRegular599.02 <- GetMaybeRel(GenoM = infile,
+                             LifeHistData = LH60K,
+                             AgePrior = AgePriors60,
+                             Module = 'ped',
+                             Err = 0.02)# 34Po
+ParRegular599.05 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.05)# 34Po
+
+PedRegular599.05 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.05)# 34Po
+
+ParRegular599.07 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.07)# 34Po
+
+PedRegular599.07 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.07)# 34Po
+ParRegular599.10 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.10)# 34Po
+
+PedRegular599.10 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.10)# 34Po
+
+Define the file path
+file_path <- "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help"
+file_name <- "Sequoia_Output4.xlsx"
+full_path <- file.path(file_path, file_name)
+
+# Create the directory if it doesn't exist
+if (!dir.exists(file_path)) {
+  dir.create(file_path, recursive = TRUE)
+}
+
+# Prepare the data to be saved
+list_of_dfs4 <- list(
+  ParRegular599.01 = ParRegular599.01$MaybePar,
+  PedRegular599.01 = PedRegular599.01$MaybeRel,
+  ParRegular599.02 = ParRegular599.02$MaybePar,
+  PedRegular599.02 = PedRegular599.02$MaybeRel,
+  ParRegular599.05 = ParRegular599.05$MaybePar,
+  PedRegular599.05 = PedRegular599.05$MaybeRel,
+  ParRegular599.07 = ParRegular599.07$MaybePar,
+  PedRegular599.07 = PedRegular599.07$MaybeRel,
+  ParRegular599.10 = ParRegular599.10$MaybePar,
+  PedRegular599.10 = PedRegular599.10$MaybeRel
+)
+
+# Write to Excel file
+write.xlsx(list_of_dfs4, file = full_path, overwrite = TRUE)
+
+
+save.image(file = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/Sequioa.help_1.26.25.RData")
+
+
+
+load("C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/Sequoia.Investigate/Sequoia.Investigate/Sequioa.help_1.26.25")

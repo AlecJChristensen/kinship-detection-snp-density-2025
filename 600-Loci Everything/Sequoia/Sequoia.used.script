@@ -1,0 +1,32 @@
+library(sequoia)
+
+infile <- GenoConvert(InFile = "C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/seq.599.ped", InFormat="ped")
+LH60K <- read.csv("C:/Users/14069/Desktop/NDSU/PC_package/PC_package/Sequoia_help/LH60_RealMaster.csv")
+
+
+AgePriors60 <-MakeAgePrior(
+  Pedigree = NULL,
+  LifeHistData = LH60K,
+  MinAgeParent = 1,
+  MaxAgeParent = NULL,
+  Discrete = NULL,
+  Flatten = NULL,
+  lambdaNW = -log(0.5)/100,
+  Smooth = TRUE,
+  Plot = TRUE,
+  Return = "LR",
+  quiet = FALSE
+)
+
+
+ParRegular599.07 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'par',
+                                Err = 0.07)# 34Po
+
+PedRegular599.07 <- GetMaybeRel(GenoM = infile,
+                                LifeHistData = LH60K,
+                                AgePrior = AgePriors60,
+                                Module = 'ped',
+                                Err = 0.07)# 34Po

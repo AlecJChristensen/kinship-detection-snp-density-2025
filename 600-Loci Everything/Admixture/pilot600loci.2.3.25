@@ -1,0 +1,23 @@
+dos2unix pilot600loci.2.3.25.pbs 
+
+#!/bin/bash
+#PBS -q default 
+#PBS -N pilot600loci.2.3.25        
+#PBS -o pilot600loci.2.3.25.txt     
+#PBS -e pilot600loci.2.3.25.txt  
+#PBS -l nodes=1:ppn=8         	      
+#PBS -l mem=32gb                     
+#PBS -l walltime=36:00:00             
+#PBS -W group_list=x-ccast-prj-tseaborn                      
+#PBS -m ae
+#PBS -M alec.christensen@ndsu.edu
+
+cd Obj.One_600loci_admixture
+module load admixture/1.3.0
+for K in {1..10}; do
+  admixture --cv Random600.pilotA.bed $K | tee log${K}.out
+done
+
+echo "yay all done"
+
+qsub pilot600loci.2.3.25.pbs
